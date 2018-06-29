@@ -5,7 +5,7 @@
     </h2>
     <p>{{ count }}</p>
     <input type="text" name="text" id="text" v-model="input">
-    <button @click="add">add</button>
+    <button @click.abc="add">add</button>
   </div>
 </template>
 
