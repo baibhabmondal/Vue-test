@@ -16,14 +16,21 @@ describe('academic-schedule', () => {
           localVue
       })
     })
-    it('should have a button', () => {
-      expect(wrapper.contains('button')).toBe(true)
+    it('should have a to date-picker', () => {
+      const toDate = wrapper.find('#toDate').element.value
+      let modelDate = wrapper.vm.toDate
+      wrapper.find('#toDate').element.value = '2018-06-30'
+      wrapper.find('#toDate').trigger('input')
+      expect(wrapper.find('#toDate').element.value).toBe(modelDate)
     })
     it('should have a save button', () => {
         expect(wrapper.contains('#save')).toBe(true)
     })
     it('should have a publish button', () => {
         expect(wrapper.contains('#publish')).toBe(true)
+    })
+    it('should contain a v-data-table', () => {
+        expect(wrapper.contains('v-data-table')).toBe(true)
     })
 
 })
