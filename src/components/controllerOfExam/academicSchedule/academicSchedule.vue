@@ -50,7 +50,7 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mt-4 mb-4" justify-center>
-      <v-data-table :headers="headers" :items="desserts" hide-actions class="elevation-1">
+      <v-data-table :headers="department" :items="desserts" hide-actions class="elevation-1">
         <template slot="items" slot-scope="props">
           <td>{{ props.item.name }}</td>
           <td class="text-xs-right">{{ props.item.calories }}</td>
@@ -89,19 +89,6 @@ export default {
       date: null,
       menu: false,
       toDate: null,
-      headers: [
-        {
-          text: 'Dates',
-          align: 'left',
-          sortable: false,
-          value: 'dates'
-        },
-        {
-          text: 'Sessions',
-          sortable: false,
-          value: 'sessions'
-        }
-      ],
       desserts: [
         {
           value: false,
@@ -166,6 +153,32 @@ export default {
   methods: {
     allowedDates (val) {
       return val >= this.date
+    }
+  },
+  computed: {
+    department () {
+      let coursesPerDepartment = this.$store.getters.course
+      let department = [
+        {
+          text: 'Dates',
+          align: 'left',
+          sortable: false,
+          value: 'dates'
+        },
+        {
+          text: 'Sessions',
+          sortable: false,
+          value: 'sessions'
+        }
+      ]
+      coursesPerDepartment.forEach(obj => {
+        department.push({
+          text: obj.department,
+          value: obj.department,
+          sortable: false
+        })
+      })
+      return department
     }
   }
 }

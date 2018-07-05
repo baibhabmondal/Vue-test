@@ -1,6 +1,6 @@
 export default {
   state: {
-    courseForSchedule: [
+    course: [
       {
         department: 'CSE',
         courses: [
@@ -118,5 +118,10 @@ export default {
         ]
       }
     ]
+  },
+  getters: {
+    course (state) {
+      return state.course
+    }
   }
 }
