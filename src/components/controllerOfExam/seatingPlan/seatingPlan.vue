@@ -2,31 +2,7 @@
 <div id="app">
   <v-app id="inspire">
     <div class="text-xs-center">
-      <v-dialog v-model="dialog" max-width="500px">
-        <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                   <span v-for="room in rooms" :key='room.room'> 
-                    <span>{{ room.room }}</span>   
-                  <v-text-field v-model="editedItem[room.room]" label=""></v-text-field>
-                  </span>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <v-container>
               <v-layout row wrap>
                 <v-flex xs12 sm6 offset-sm3>
                   <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40" :return-value.sync="date" lazy transition="scale-transition"
@@ -38,6 +14,11 @@
                       <v-btn flat color="primary" @click="datePicked">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
+                </v-flex>
+              </v-layout>
+              <v-layout row justify-center>
+                <v-flex xs12 sm6 class="mt-3">
+                  <v-select label="Select Session" :items ="sessions" solo v-model="session"></v-select>
                 </v-flex>
               </v-layout>
             <v-layout row class="mt-4">
@@ -87,6 +68,7 @@
            </v-btn>
         </v-flex>
       </v-layout>
+      </v-container>
     </div>
   </v-app>
 </div>
@@ -103,7 +85,9 @@ export default {
     dialog: false,
     editedIndex: -1,
     editedItem: {},
-    defaultItem: {}
+    defaultItem: {},
+    sessions: ['Forenoon', 'Afternoon'],
+    session: ''
   }),
 
   computed: {

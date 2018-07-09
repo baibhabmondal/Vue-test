@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-container>
-     <v-layout row wrap justify-center>
+    <v-layout row wrap justify-center>
       <v-flex xs12 lg3>
           <v-text-field
             solo
@@ -38,7 +38,7 @@
           ></v-text-field>
           <v-date-picker
             :allowed-dates="allowedDates"
-            v-model="toDate"            
+            v-model="toDate"
             no-title
             scrollable
           >
@@ -50,14 +50,39 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mt-4 mb-4" justify-center>
-      <v-data-table :headers="department" :items="desserts" hide-actions class="elevation-1">
+      <v-data-table :headers="department" :items="items" hide-actions class="elevation-1">
         <template slot="items" slot-scope="props">
-          <td>{{ props.item.name }}</td>
-          <td class="text-xs-right">{{ props.item.calories }}</td>
-          <td class="text-xs-right">{{ props.item.fat }}</td>
-          <td class="text-xs-right">{{ props.item.carbs }}</td>
-          <td class="text-xs-right">{{ props.item.protein }}</td>
-          <td class="text-xs-right">{{ props.item.iron }}</td>
+          <!-- <tr>
+            <td>
+              13-12-2018
+            </td>
+            <td>
+              afternoon
+            </td>
+            <td>
+              <v-select :items="['ada','csa']"></v-select>
+            </td>
+            <td>
+              <v-select :items="['ada','csa']"></v-select>
+            </td>
+            <td>
+              <v-select :items="['ada','csa']"></v-select>
+            </td>
+            <td>
+              <v-select :items="['ada','csa']"></v-select>
+            </td>
+          </tr> -->
+          <td>{{ props.item.date }}</td>
+          <td>
+            <tr>
+              Forenoon
+            </tr>
+            <tr>
+              afternoon
+            </tr>
+          </td>
+          <!-- <td class="text-xs-right"><v-select :items="['ada','csa']"></v-select></td> -->
+          <!-- <td class="text-xs-right">{{ props.item.fat }}</td> -->
         </template>
       </v-data-table>
     </v-layout>
@@ -83,12 +108,14 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
       date: null,
       menu: false,
       toDate: null,
+      course: [],
       desserts: [
         {
           value: false,
@@ -147,8 +174,11 @@ export default {
       ]
     }
   },
-  created () {
+  async created () {
     this.date = '2018-06-29'
+    const response = await axios.get('http://localhost:3000/courses')
+    this.course = response.data
+    // console.log(response.data)
   },
   methods: {
     allowedDates (val) {
@@ -156,14 +186,27 @@ export default {
     }
   },
   computed: {
+    items () {
+      let items = []
+      let courses = this.course
+      for (let i = 0; i < 5; i++) {
+        let obj = {}
+        courses.forEach(item => {
+          obj.date = '13-12-2018'
+          obj[courses.department] = 'ADA'
+        })
+        items.push(obj)
+      }
+      return items
+    },
     department () {
-      let coursesPerDepartment = this.$store.getters.course
+      let coursesPerDepartment = this.course
       let department = [
         {
           text: 'Dates',
           align: 'left',
           sortable: false,
-          value: 'dates'
+          value: 'date'
         },
         {
           text: 'Sessions',
