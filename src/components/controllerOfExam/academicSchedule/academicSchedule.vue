@@ -74,12 +74,24 @@
           </tr> -->
           <td>{{ props.item.date }}</td>
           <td>
-            <tr>
-              Forenoon
-            </tr>
-            <tr>
-              afternoon
-            </tr>
+            <v-layout column>
+              <v-flex>
+                forenoon
+              </v-flex>
+              <v-flex>
+                Afternoon
+              </v-flex>
+            </v-layout>
+          </td>
+          <td v-for="item in course" :key="item.department">
+            <v-layout column>
+            <v-flex>
+            <v-select full-width :items="item.courses" item-text="name" style="padding: 0;"></v-select>
+          </v-flex>
+            <v-flex>
+            <v-select full-width :items="item.courses" item-text="name" style="padding: 0;"></v-select>
+          </v-flex>
+          </v-layout>
           </td>
           <!-- <td class="text-xs-right"><v-select :items="['ada','csa']"></v-select></td> -->
           <!-- <td class="text-xs-right">{{ props.item.fat }}</td> -->
@@ -181,6 +193,9 @@ export default {
     // console.log(response.data)
   },
   methods: {
+    courseNames () {
+      console.log('courseName called')
+    },
     allowedDates (val) {
       return val >= this.date
     }

@@ -11,19 +11,19 @@
           },
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Microprocessors",
             "date": null,
             "session": null
           },
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Computer Architecture",
             "date": null,
             "session": null
           },
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Data Structures",
             "date": null,
             "session": null
           }
@@ -34,19 +34,19 @@
         "courses": [
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Data Structures",
             "date": null,
             "session": null
           },
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Software Principles",
             "date": null,
             "session": null
           },
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Discreet Math",
             "date": null,
             "session": null
           },
@@ -63,25 +63,25 @@
         "courses": [
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Communications",
             "date": null,
             "session": null
           },
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Electron Devices",
             "date": null,
             "session": null
           },
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Basic Electronics",
             "date": null,
             "session": null
           },
           {
             "code": "12AD12",
-            "name": "Algorithms",
+            "name": "Advance electronics",
             "date": null,
             "session": null
           }
