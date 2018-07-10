@@ -44,7 +44,13 @@
           >
             <v-spacer></v-spacer>
             <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-            <v-btn flat color="primary" @click="$refs.menu.save(toDate)">OK</v-btn>
+            <v-btn
+              flat
+              color="primary"
+              @click="totalDates(date,toDate)"
+              :loading="loading"
+              :disabled="loading">OK
+            </v-btn>
           </v-date-picker>
         </v-menu>
       </v-flex>
@@ -66,10 +72,26 @@
           <td v-for="item in course" :key="item.department">
             <v-layout column>
             <v-flex>
-            <v-select full-width :items="item.courses" item-text="name" style="padding: 0;"></v-select>
+            <v-select
+              multiple
+              small-chips
+              hide-selected
+              deletable-chips
+              :items="item.courses"
+              item-text="name"
+              style="padding: 0;max-width: 100px;">
+            </v-select>
           </v-flex>
             <v-flex>
-            <v-select full-width :items="item.courses" item-text="name" style="padding: 0;"></v-select>
+              <v-select
+              multiple
+              small-chips
+              hide-selected
+              deletable-chips
+              :items="item.courses"
+              item-text="name"
+              style="padding: 0;max-width: 100px;">
+            </v-select>
           </v-flex>
           </v-layout>
           </td>
@@ -102,96 +124,54 @@ import axios from 'axios'
 export default {
   data () {
     return {
+      loading: false,
       date: null,
       menu: false,
       toDate: null,
+      dispDates: 0,
       course: [],
-      desserts: [
-        {
-          value: false,
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: '1%'
-        },
-        {
-          value: false,
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: '1%'
-        },
-        {
-          value: false,
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: '7%'
-        },
-        {
-          value: false,
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: '8%'
-        },
-        {
-          value: false,
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: '16%'
-        },
-        {
-          value: false,
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: '0%'
-        }
-      ]
+      items: [],
+      selectedCourse: []
     }
   },
   async created () {
     this.date = '2018-06-29'
     const response = await axios.get('http://localhost:3000/courses')
     this.course = response.data
+    this.course.forEach(item => {
+      if (item.courses.date && item.courses.session) {
+        this.selectedCourse.push(item)
+      }
+    })
     // console.log(response.data)
   },
   methods: {
+    // getDates () {
+
+    // },
     courseNames () {
       console.log('courseName called')
     },
     allowedDates (val) {
       return val >= this.date
+    },
+    totalDates (start, end) {
+      this.loading = true
+      this.$refs.menu.save(this.toDate)
+      let a = new Date(start)
+      let b = new Date(end)
+      while (a <= b) {
+        let obj = {}
+        obj.date = `${a.getDate()}-${a.getMonth() + 1}-${a.getFullYear()}`
+        a.setDate(a.getDate() + 1)
+        this.items.push(obj)
+        console.log(a)
+        console.log(a.getMonth() + 1)
+      }
+      this.loading = false
     }
   },
   computed: {
-    items () {
-      let items = []
-      let courses = this.course
-      for (let i = 0; i < 5; i++) {
-        let obj = {}
-        courses.forEach(item => {
-          obj.date = '13-12-2018'
-          obj[courses.department] = 'ADA'
-        })
-        items.push(obj)
-      }
-      return items
-    },
     department () {
       let coursesPerDepartment = this.course
       let department = [
