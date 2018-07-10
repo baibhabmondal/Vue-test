@@ -52,26 +52,6 @@
     <v-layout row wrap class="mt-4 mb-4" justify-center>
       <v-data-table :headers="department" :items="items" hide-actions class="elevation-1">
         <template slot="items" slot-scope="props">
-          <!-- <tr>
-            <td>
-              13-12-2018
-            </td>
-            <td>
-              afternoon
-            </td>
-            <td>
-              <v-select :items="['ada','csa']"></v-select>
-            </td>
-            <td>
-              <v-select :items="['ada','csa']"></v-select>
-            </td>
-            <td>
-              <v-select :items="['ada','csa']"></v-select>
-            </td>
-            <td>
-              <v-select :items="['ada','csa']"></v-select>
-            </td>
-          </tr> -->
           <td>{{ props.item.date }}</td>
           <td>
             <v-layout column>
@@ -93,8 +73,6 @@
           </v-flex>
           </v-layout>
           </td>
-          <!-- <td class="text-xs-right"><v-select :items="['ada','csa']"></v-select></td> -->
-          <!-- <td class="text-xs-right">{{ props.item.fat }}</td> -->
         </template>
       </v-data-table>
     </v-layout>
