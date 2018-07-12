@@ -59,8 +59,6 @@
           <v-btn color="primary" @click="initialize">Reset</v-btn>
         </template>
       </v-data-table>
-      <p>{{ this.items }}</p>
-      <p>{{ this.rooms }}</p>
       <v-layout row>
         <v-flex xs12 text-xs-center>
            <v-btn @click="saveSeat" class="secondary">

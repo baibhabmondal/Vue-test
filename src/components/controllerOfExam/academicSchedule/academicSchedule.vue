@@ -79,6 +79,7 @@
               deletable-chips
               :items="item.courses"
               item-text="name"
+              @input="add($event, props.item.date, item.department, 'forenoon')"
               style="padding: 0;max-width: 100px;">
             </v-select>
           </v-flex>
@@ -131,7 +132,8 @@ export default {
       dispDates: 0,
       course: [],
       items: [],
-      selectedCourse: []
+      selectedCourse: [],
+      final: []
     }
   },
   async created () {
@@ -139,24 +141,69 @@ export default {
     const response = await axios.get('http://localhost:3000/courses')
     this.course = response.data
     this.course.forEach(item => {
-      if (item.courses.date && item.courses.session) {
-        this.selectedCourse.push(item)
-      }
+      let obj = {}
+      obj.department = item.department
+      obj.courses = []
+      item.courses.forEach(item2 => {
+        if (item2.date && item2.session) {
+          obj.courses.push(item2)
+        }
+      })
+      console.log(obj)
+      this.selectedCourse.push(obj)
     })
-    // console.log(response.data)
   },
   methods: {
     // getDates () {
 
     // },
-    courseNames () {
-      console.log('courseName called')
+    add (event, date, dept, session) {
+      console.log('ADD')
+      console.log(event)
+      if (this.final.length !== 0) {
+        this.final.forEach(item => {
+          if (item.department === dept) {
+            event.forEach(e => {
+              let obj = {}
+              obj.name = e
+              obj.date = date
+              obj.session = session
+              item.courses.push(obj)
+            })
+          } else {
+            event.forEach(e => {
+              let obj = {}
+              obj.department = dept
+              obj.courses = []
+              let obj2 = {}
+              obj2.name = e
+              obj2.date = date
+              obj2.session = session
+              obj.courses.push(obj2)
+              this.final.push(obj)
+            })
+          }
+        })
+      } else {
+        event.forEach(e => {
+          let obj = {}
+          obj.department = dept
+          obj.courses = []
+          let obj2 = {}
+          obj2.name = e
+          obj2.date = date
+          obj2.session = session
+          obj.courses.push(obj2)
+          this.final.push(obj)
+        })
+      }
+      console.log(this.final)
     },
     allowedDates (val) {
       return val >= this.date
     },
     totalDates (start, end) {
-      this.loading = true
+      this.items = []
       this.$refs.menu.save(this.toDate)
       let a = new Date(start)
       let b = new Date(end)
@@ -165,10 +212,7 @@ export default {
         obj.date = `${a.getDate()}-${a.getMonth() + 1}-${a.getFullYear()}`
         a.setDate(a.getDate() + 1)
         this.items.push(obj)
-        console.log(a)
-        console.log(a.getMonth() + 1)
       }
-      this.loading = false
     }
   },
   computed: {
