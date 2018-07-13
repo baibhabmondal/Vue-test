@@ -1,91 +1,148 @@
 {
-    "courses": [
-      {
-        "department": "CSE",
-        "courses": [
-          {
-            "code": "12AD12",
-            "name": "Algorithms",
-            "date": "12-12-2018",
-            "session": "forenoon"
-          },
-          {
-            "code": "12AD12",
-            "name": "Microprocessors",
-            "date": null,
-            "session": null
-          },
-          {
-            "code": "12AD12",
-            "name": "Computer Architecture",
-            "date": null,
-            "session": null
-          },
-          {
-            "code": "12AD12",
-            "name": "Data Structures",
-            "date": null,
-            "session": null
-          }
-        ]
-      },
-      {
-        "department": "IT",
-        "courses": [
-          {
-            "code": "12AD12",
-            "name": "Data Structures",
-            "date": null,
-            "session": null
-          },
-          {
-            "code": "12AD12",
-            "name": "Software Principles",
-            "date": null,
-            "session": null
-          },
-          {
-            "code": "12AD12",
-            "name": "Discreet Math",
-            "date": null,
-            "session": null
-          },
-          {
-            "code": "12AD12",
-            "name": "Algorithms",
-            "date": null,
-            "session": null
-          }
-        ]
-      },
-      {
-        "department": "ECE",
-        "courses": [
-          {
-            "code": "12AD12",
-            "name": "Communications",
-            "date": null,
-            "session": null
-          },
-          {
-            "code": "12AD12",
-            "name": "Electron Devices",
-            "date": null,
-            "session": null
-          },
-          {
-            "code": "12AD12",
-            "name": "Basic Electronics",
-            "date": null,
-            "session": null
-          },
-          {
-            "code": "12AD12",
-            "name": "Advance electronics",
-            "date": null,
-            "session": null
-          }
-        ]
-      }
-    ]
+  "selectedCourses": [
+    {
+      "body": [
+        {
+          "department": "CSE",
+          "courses": [
+            {
+              "name": "Algorithms",
+              "date": "29-6-2018",
+              "session": "forenoon"
+            },
+            {
+              "name": "Microprocessors",
+              "date": "30-6-2018",
+              "session": "afternoon"
+            },
+            {
+              "name": "Computer Architecture",
+              "date": "1-7-2018",
+              "session": "forenoon"
+            },
+            {
+              "name": "Data Structures",
+              "date": "1-7-2018",
+              "session": "forenoon"
+            }
+          ]
+        },
+        {
+          "department": "ECE",
+          "courses": [
+            {
+              "name": "Electron Devices",
+              "date": "29-6-2018",
+              "session": "afternoon"
+            },
+            {
+              "name": "Communications",
+              "date": "1-7-2018",
+              "session": "forenoon"
+            }
+          ]
+        },
+        {
+          "department": "IT",
+          "courses": [
+            {
+              "name": "Software Principles",
+              "date": "29-6-2018",
+              "session": "afternoon"
+            }
+          ]
+        }
+      ],
+      "id": 1
+    }
+  ],
+  "courses": [
+    {
+      "department": "CSE",
+      "courses": [
+        {
+          "code": "12AD12",
+          "name": "Algorithms",
+          "date": "12-12-2018",
+          "session": "forenoon"
+        },
+        {
+          "code": "12AD12",
+          "name": "Microprocessors",
+          "date": null,
+          "session": null
+        },
+        {
+          "code": "12AD12",
+          "name": "Computer Architecture",
+          "date": null,
+          "session": null
+        },
+        {
+          "code": "12AD12",
+          "name": "Data Structures",
+          "date": null,
+          "session": null
+        }
+      ]
+    },
+    {
+      "department": "IT",
+      "courses": [
+        {
+          "code": "12AD12",
+          "name": "Data Structures",
+          "date": null,
+          "session": null
+        },
+        {
+          "code": "12AD12",
+          "name": "Software Principles",
+          "date": null,
+          "session": null
+        },
+        {
+          "code": "12AD12",
+          "name": "Discreet Math",
+          "date": null,
+          "session": null
+        },
+        {
+          "code": "12AD12",
+          "name": "Algorithms",
+          "date": null,
+          "session": null
+        }
+      ]
+    },
+    {
+      "department": "ECE",
+      "courses": [
+        {
+          "code": "12AD12",
+          "name": "Communications",
+          "date": null,
+          "session": null
+        },
+        {
+          "code": "12AD12",
+          "name": "Electron Devices",
+          "date": null,
+          "session": null
+        },
+        {
+          "code": "12AD12",
+          "name": "Basic Electronics",
+          "date": null,
+          "session": null
+        },
+        {
+          "code": "12AD12",
+          "name": "Advance electronics",
+          "date": null,
+          "session": null
+        }
+      ]
+    }
+  ]
 }

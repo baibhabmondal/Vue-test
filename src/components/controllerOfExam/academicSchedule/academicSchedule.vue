@@ -1,5 +1,8 @@
 <template>
 <div>
+              <v-alert v-if="error" v-model="alert" dismissible type="error">
+               {{ error }}
+              </v-alert>
   <v-container>
     <v-layout row wrap justify-center>
       <v-flex xs12 lg3>
@@ -112,7 +115,7 @@
         </v-btn>
       </v-flex>
       <v-flex text-xs-left>
-        <v-btn class="secondary">
+        <v-btn @click="post" class="secondary">
           Publish
         </v-btn>
       </v-flex>
@@ -134,7 +137,9 @@ export default {
       course: [],
       items: [],
       selectedCourse: [],
-      final: []
+      final: [],
+      error: null,
+      alert: true
     }
   },
   async created () {
@@ -227,6 +232,15 @@ export default {
         obj.date = `${a.getDate()}-${a.getMonth() + 1}-${a.getFullYear()}`
         a.setDate(a.getDate() + 1)
         this.items.push(obj)
+      }
+    },
+    async post () {
+      try {
+        await axios.post('http://localhost:3000/selectedCourses', {
+          body: this.final
+        })
+      } catch (e) {
+        this.error = e
       }
     }
   },
