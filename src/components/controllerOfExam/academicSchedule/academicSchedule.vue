@@ -162,6 +162,7 @@ export default {
       console.log('ADD')
       console.log(event)
       if (this.final.length !== 0) {
+        let df = 0
         this.final.forEach(item => {
           const courses = item.courses
           if (item.department === dept) {
@@ -182,20 +183,22 @@ export default {
                 })
               }
             })
-          } else {
-            event.forEach(e => {
-              let obj = {}
-              obj.department = dept
-              obj.courses = []
-              let obj2 = {}
-              obj2.name = e
-              obj2.date = date
-              obj2.session = session
-              obj.courses.push(obj2)
-              this.final.push(obj)
-            })
+            df = 1
           }
         })
+        if (df !== 1) {
+          let obj = {}
+          obj.department = dept
+          obj.courses = []
+          event.forEach(e => {
+            let obj2 = {}
+            obj2.name = e
+            obj2.date = date
+            obj2.session = session
+            obj.courses.push(obj2)
+          })
+          this.final.push(obj)
+        }
       } else {
         event.forEach(e => {
           let obj = {}
