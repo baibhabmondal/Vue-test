@@ -91,6 +91,7 @@
               deletable-chips
               :items="item.courses"
               item-text="name"
+              @input="add($event, props.item.date, item.department, 'afternoon')"
               style="padding: 0;max-width: 100px;">
             </v-select>
           </v-flex>
@@ -162,13 +163,24 @@ export default {
       console.log(event)
       if (this.final.length !== 0) {
         this.final.forEach(item => {
+          const courses = item.courses
           if (item.department === dept) {
             event.forEach(e => {
-              let obj = {}
-              obj.name = e
-              obj.date = date
-              obj.session = session
-              item.courses.push(obj)
+              let f = 0
+              courses.forEach(course => {
+                if (e === course.name) {
+                  course.date = date
+                  course.session = session
+                  f = 1
+                }
+              })
+              if (f !== 1) {
+                courses.push({
+                  name: e,
+                  date,
+                  session
+                })
+              }
             })
           } else {
             event.forEach(e => {
